@@ -4,7 +4,7 @@ _Author: @8bitmp3 (for [Flax documentation](https://flax.readthedocs.io))_
 
 This tutorial uses Flax—a high-performance deep learning library for JAX designed for flexibility—to show you how to construct a simple convolutional neural network (CNN) using the Linen API and train the network for image classification on the MNIST dataset.
 
-If you're new to JAX, check out [JAX quickstart](https://jax.readthedocs.io/en/latest/notebooks/quickstart.html) and [JAX for the impatient](https://flax.readthedocs.io/en/latest/notebooks/jax_for_the_impatient.html). To learn more about Flax and its Linen API, refer to [Flax basics](https://flax.readthedocs.io/en/latest/notebooks/flax_basics.html), [Flax patterns: Managing state and parameters](https://flax.readthedocs.io/en/latest/patterns/state_params.html), and [Linen design principles](https://flax.readthedocs.io/en/latest/design_notes/linen_design_principles.html).
+If you're new to JAX, check out [JAX quickstart](https://jax.readthedocs.io/en/latest/notebooks/quickstart.html) and [JAX for the impatient](https://flax.readthedocs.io/en/latest/notebooks/jax_for_the_impatient.html). To learn more about Flax and its Linen API, refer to [Flax basics](https://flax.readthedocs.io/en/latest/notebooks/flax_basics.html), [Flax patterns: Managing state and parameters](https://flax.readthedocs.io/en/latest/patterns/state_params.html), [Linen design principles](https://flax.readthedocs.io/en/latest/design_notes/linen_design_principles.html), and the [Linen introduction](https://github.com/google/flax/blob/master/docs/notebooks/linen_intro.ipynb) notebook.
 
 This tutorial has the following workflow:
 
@@ -102,7 +102,7 @@ def create_optimizer(params, learning_rate, beta):
 
 3. Create a function for parameter initialization:
   - Set the initial shape of the kernel (note that JAX and Flax are [row-based](https://flax.readthedocs.io/en/latest/notebooks/flax_basics.html#Model-parameters-&-initialization)); and
-  - Initialize the module parameters of your network (`CNN`) with the [`flax.linen.Module.init`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.init) method using the PRNGKey and parameters (note that the weights aren't stored with the models). 
+  - Initialize the module parameters of your network (`CNN`) with the [`flax.linen.Module.init`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.init) method using the PRNGKey and parameters (note that the parameters aren't stored with the models). 
 
 
 ```python
@@ -156,7 +156,7 @@ def get_datasets():
   - Applies a [pytree](https://jax.readthedocs.io/en/latest/pytrees.html#pytrees-and-jax-functions) of gradients ([`flax.optim.Optimizer.apply_gradient`](https://flax.readthedocs.io/en/latest/flax.optim.html#flax.optim.Optimizer.apply_gradient)) to the optimizer to update the model's parameters.
   - Computes the metrics using `compute_metrics` (defined earlier).
 
-  Use the `@jit` decorator—the entire function is now just-in-time([`jit`](https://jax.readthedocs.io/en/latest/jax.html#jax.jit))-compiled with [XLA](https://www.tensorflow.org/xla) to make your code run faster and more efficiently.
+  Use JAX's [`@jit`](https://jax.readthedocs.io/en/latest/jax.html#jax.jit) decorator to trace the entire `train_step` function` and just-in-time([`jit`]-compile with [XLA](https://www.tensorflow.org/xla) into fused device operations that run faster and more efficiently on hardware accelerators.
 
 
 ```python
@@ -260,16 +260,16 @@ train_ds, test_ds = get_datasets()
     [1mDataset mnist downloaded and prepared to /root/tensorflow_datasets/mnist/3.0.1. Subsequent calls will reuse this data.[0m
 
 
-## Initialize the weights and instantiate the optimizer
+## Initialize the parameters and instantiate the optimizer
 
-1. Before you start training the model, you need to randomly initialize the weights/parameters.
+1. Before you start training the model, you need to randomly initialize the parameters.
 
   In NumPy, you would usually use the stateful pseudorandom number generators (PRNG). JAX, however, uses an explicit PRNG (refer to [JAX - the sharp bits](https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html#JAX-PRNG) for details):
 
   - Start by getting two unsigned 32-bit integers with [`jax.random.PRNGKey`](https://jax.readthedocs.io/en/latest/_autosummary/jax.random.PRNGKey.html#jax.random.PRNGKey) as one key (`rng`).
   - Then, split the PRNG to obtain a usable subkey for parameter initialization (`init_rng` below) using [`jax.random.split`](https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split). 
 
-  Note that in JAX and Flax you can have [separate PRNG chains](https://flax.readthedocs.io/en/latest/design_notes/linen_design_principles.html#how-are-parameters-represented-and-how-do-we-handle-general-differentiable-algorithms-that-update-stateful-variables) (with different names, such as `rng` and `init_rng` below) inside `Module`s for different applications.
+  Note that in JAX and Flax you can have [separate PRNG chains](https://flax.readthedocs.io/en/latest/design_notes/linen_design_principles.html#how-are-parameters-represented-and-how-do-we-handle-general-differentiable-algorithms-that-update-stateful-variables) (with different names, such as `rng` and `init_rng` below) inside `Module`s for different applications. (Find out more about [JAX PRNG design](https://github.com/google/jax/blob/master/design_notes/prng.md).)
 
 
 ```python
@@ -304,8 +304,9 @@ num_epochs = 10
 batch_size = 32
 ```
 
-2. Finally, begin training and evaluating the model:
-  - Similar to the parameter initialization stage, [split](https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html#JAX-PRNG) the PRNG key to get a new subkey—`input_rng`—with [`jax.random.split`](https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split). `input_rng` will be used to permute image data during the shuffling stage when training.
+2. Finally, begin training and evaluating the model over 10 epochs:
+
+  - For your training function (`train_epoch`), you need to pass a PRNG key used to permute image data during shuffling. Since you have created a PRNG key when initializing the parameters in your nework, you just need to [split](https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html#JAX-PRNG) or "fork" the PRNG state into two (while maintaining the usual desirable PRNG properties) to get a new subkey (`input_rng`, in this example) and the previous key (`rng`). Use [`jax.random.split`](https://jax.readthedocs.io/en/latest/_autosummary/jax.random.split.html#jax.random.split) to carry this out. (Learn more about [JAX PRNG design](https://github.com/google/jax/blob/master/design_notes/prng.md).)
   - Run an optimization step over a training batch (`train_epoch`).
   - Evaluate on the test set after each training epoch (`eval_model`).
   - Retrieve the metrics from the device and print them.
