@@ -96,7 +96,7 @@ def create_optimizer(params, learning_rate, beta):
 
 3. Create a function for parameter initialization:
   - Set the initial shape of the kernel (note that JAX and Flax are [row-based](https://flax.readthedocs.io/en/latest/notebooks/flax_basics.html#Model-parameters-&-initialization)); and
-  - Initialize the module parameters of your network (`CNN`) with the [`flax.linen.Module.init`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.init) method using the PRNGKey and parameters (note that the parameters aren't stored with the models). 
+  - Initialize the module parameters of your network (`CNN`) with the [`flax.linen.Module.init`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.init) method using the PRNG key, which returns the parameters (note that the parameters are explicitly tracked separately from the model defintion). 
 
 
 ```python
