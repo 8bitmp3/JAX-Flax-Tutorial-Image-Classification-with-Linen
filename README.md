@@ -144,7 +144,7 @@ def get_datasets():
 
 1. Write a training step function that:
 
-  - Evaluates the neural network given the parameters and a batch of input images with the [`flax.linen.apply`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.apply) method.
+  - Evaluates the neural network given the parameters and a batch of input images with the [`flax.linen.Module.apply`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.apply) method.
   - Computes the `cross_entropy_loss` loss function.
   - Evaluates the loss function and its gradient using [`jax.value_and_grad`](https://jax.readthedocs.io/en/latest/jax.html#jax.value_and_grad) (check the [JAX autodiff cookbook](https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#Evaluate-a-function-and-its-gradient-using-value_and_grad) to learn more).
   - Applies a [pytree](https://jax.readthedocs.io/en/latest/pytrees.html#pytrees-and-jax-functions) of gradients ([`flax.optim.Optimizer.apply_gradient`](https://flax.readthedocs.io/en/latest/flax.optim.html#flax.optim.Optimizer.apply_gradient)) to the optimizer to update the model's parameters.
@@ -167,7 +167,7 @@ def train_step(optimizer, batch):
   return optimizer, metrics
 ```
 
-2. Create a [`jit`](https://jax.readthedocs.io/en/latest/jax.html#jax.jit)-compiled function that evaluates the model on the test set using [`flax.linen.apply`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.apply):
+2. Create a [`jit`](https://jax.readthedocs.io/en/latest/jax.html#jax.jit)-compiled function that evaluates the model on the test set using [`flax.linen.Module.apply`](https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module.apply):
 
 
 ```python
