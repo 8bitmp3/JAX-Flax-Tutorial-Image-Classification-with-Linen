@@ -150,7 +150,7 @@ def get_datasets():
   - Applies a [pytree](https://jax.readthedocs.io/en/latest/pytrees.html#pytrees-and-jax-functions) of gradients ([`flax.optim.Optimizer.apply_gradient`](https://flax.readthedocs.io/en/latest/flax.optim.html#flax.optim.Optimizer.apply_gradient)) to the optimizer to update the model's parameters.
   - Computes the metrics using `compute_metrics` (defined earlier).
 
-  Use JAX's [`@jit`](https://jax.readthedocs.io/en/latest/jax.html#jax.jit) decorator to trace the entire `train_step` function and just-in-time([`jit`]-compile with [XLA](https://www.tensorflow.org/xla) into fused device operations that run faster and more efficiently on hardware accelerators.
+  Use JAX's [`@jit`](https://jax.readthedocs.io/en/latest/jax.html#jax.jit) decorator to trace the entire `train_step` function and just-in-time (JIT)-compile with [XLA](https://www.tensorflow.org/xla) into fused device operations that run faster and more efficiently on hardware accelerators.
 
 
 ```python
