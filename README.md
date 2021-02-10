@@ -1,6 +1,6 @@
 # The annotated MNIST image classification example with Flax
 
-_Author: [@8bitmp3](https://github.com/8bitmp3) (for [Flax documentation](https://flax.readthedocs.io))_
+_Author: [@8bitmp3](https://github.com/8bitmp3) (this is an extended version of the more concise [Flax example](https://github.com/google/flax/blob/master/docs/annotated_mnist.md))_
 
 This tutorial uses Flax—a high-performance deep learning library for JAX designed for flexibility—to show you how to construct a simple convolutional neural network (CNN) using the Linen API and train the network for image classification on the MNIST dataset.
 
