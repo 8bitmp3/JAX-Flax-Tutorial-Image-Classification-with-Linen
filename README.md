@@ -236,6 +236,7 @@ params = cnn.init(init_rng, jnp.ones([1, 28, 28, 1]))['params']
 
 ```python
 nesterov_momentum = 0.9
+learning_rate = 0.001
 tx = optax.sgd(learning_rate=learning_rate, nesterov=nesterov_momentum)
 ```
 
