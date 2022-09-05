@@ -272,26 +272,23 @@ for epoch in range(1, num_epochs + 1):
   test_loss, test_accuracy = eval_model(state.params, test_ds)
   print('Testing - epoch: %d, loss: %.2f, accuracy: %.2f' % (epoch, test_loss, test_accuracy * 100))
 ```
-    Training - epoch: 1, loss: 0.1963, accuracy: 93.96
-    Testing - epoch: 1, loss: 0.09, accuracy: 96.97
-    Training - epoch: 2, loss: 0.0622, accuracy: 98.10
-    Testing - epoch: 2, loss: 0.05, accuracy: 98.35
-    Training - epoch: 3, loss: 0.0428, accuracy: 98.70
-    Testing - epoch: 3, loss: 0.04, accuracy: 98.74
-    Training - epoch: 4, loss: 0.0330, accuracy: 98.98
-    Testing - epoch: 4, loss: 0.03, accuracy: 99.02
-    Training - epoch: 5, loss: 0.0263, accuracy: 99.16
-    Testing - epoch: 5, loss: 0.03, accuracy: 99.03
-    Training - epoch: 6, loss: 0.0219, accuracy: 99.31
-    Testing - epoch: 6, loss: 0.03, accuracy: 99.00
-    Training - epoch: 7, loss: 0.0178, accuracy: 99.44
-    Testing - epoch: 7, loss: 0.03, accuracy: 99.03
-    Training - epoch: 8, loss: 0.0139, accuracy: 99.58
-    Testing - epoch: 8, loss: 0.03, accuracy: 99.08
-    Training - epoch: 9, loss: 0.0116, accuracy: 99.66
-    Testing - epoch: 9, loss: 0.03, accuracy: 99.16
-    Training - epoch: 10, loss: 0.0102, accuracy: 99.70
-    Testing - epoch: 10, loss: 0.03, accuracy: 99.01
-
-
-Once the training and testing is done after 10 epochs, the output should show that your model was able to achieve approximately 99% accuracy.
+    Training - epoch: 1, loss: 1.7941, accuracy: 62.73
+    Testing - epoch: 1, loss: 0.93, accuracy: 82.31
+    Training - epoch: 2, loss: 0.6114, accuracy: 85.10
+    Testing - epoch: 2, loss: 0.44, accuracy: 88.47
+    Training - epoch: 3, loss: 0.4128, accuracy: 88.40
+    Testing - epoch: 3, loss: 0.36, accuracy: 89.89
+    Training - epoch: 4, loss: 0.3598, accuracy: 89.67
+    Testing - epoch: 4, loss: 0.32, accuracy: 90.81
+    Training - epoch: 5, loss: 0.3280, accuracy: 90.50
+    Testing - epoch: 5, loss: 0.30, accuracy: 91.54
+    Training - epoch: 6, loss: 0.3047, accuracy: 91.18
+    Testing - epoch: 6, loss: 0.28, accuracy: 91.94
+    Training - epoch: 7, loss: 0.2853, accuracy: 91.71
+    Testing - epoch: 7, loss: 0.26, accuracy: 92.26
+    Training - epoch: 8, loss: 0.2680, accuracy: 92.15
+    Testing - epoch: 8, loss: 0.24, accuracy: 92.90
+    Training - epoch: 9, loss: 0.2522, accuracy: 92.72
+    Testing - epoch: 9, loss: 0.23, accuracy: 93.15
+    Training - epoch: 10, loss: 0.2384, accuracy: 92.99
+    Testing - epoch: 10, loss: 0.22, accuracy: 93.56
