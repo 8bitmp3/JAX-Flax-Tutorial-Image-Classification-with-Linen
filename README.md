@@ -33,13 +33,13 @@ If you're using [Google Colaboratory](https://colab.research.google.com/notebook
 
 ## Setup
 
-1. Import JAX, [JAX NumPy](https://jax.readthedocs.io/en/latest/jax.numpy.html), Flax, [Optax](https://github.com/deepmind/optax/), ordinary NumPy, and TensorFlow Datasets (TFDS). Flax can use any data-loading pipeline and this example demonstrates how to utilize TFDS.
+1. Install JAX, Flax, [Optax](https://github.com/deepmind/optax/), and TensorFlow Datasets (TFDS). Flax can use any data-loading pipeline and this example demonstrates how to utilize TFDS.
 
 ```python
 !pip install --upgrade -q pip jax jaxlib flax optax tensorflow-datasets
 ```
 
-2. Import JAX, [JAX NumPy](https://jax.readthedocs.io/en/latest/jax.numpy.html) (which lets you run code on GPUs and TPUs), Flax, ordinary NumPy, and TFDS. Flax can use any data-loading pipeline and this example demonstrates how to utilize TFDS.
+2. Import JAX, [JAX NumPy](https://jax.readthedocs.io/en/latest/jax.numpy.html) (which lets you run code on GPUs and TPUs), Flax, ordinary NumPy, and TFDS.
 
 ```python
 import jax
