@@ -1,5 +1,9 @@
 # The annotated MNIST image classification example with Flax Linen and Optax
 
+UPDATE: Use the [**up-to-date Flax Quickstart**](https://flax.readthedocs.io/en/latest/getting_started.html) on the official Flax site.
+
+---
+
 _Author: @8bitmp3_
 
 This tutorial uses [Flax](https://flax.readthedocs.io)—a high-performance deep learning library for [JAX](https://jax.readthedocs.io) designed for flexibility—to show you how to construct a simple convolutional neural network (CNN) using the Linen API and [Optax](https://github.com/deepmind/optax/) and train the network for image classification on the MNIST dataset.
